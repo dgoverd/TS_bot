@@ -3,7 +3,7 @@ from typing import Dict, List
 
 import sqlite3
 
-conn = sqlite3.connect(os.path.join("db", "finance.db"))
+# conn = sqlite3.connect(os.path.join("db", "finance.db"))
 
 
 def ensure_connection(func):

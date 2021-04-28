@@ -2,3 +2,4 @@
 db/
 .idea/
 trash
+__pycache__/
