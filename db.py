@@ -3,21 +3,18 @@ from typing import Dict, List
 
 import sqlite3
 
-# conn = sqlite3.connect(os.path.join("db", "finance.db"))
-
 
 def ensure_connection(func):
     def wrapper(*args, **kwargs):
-
         with sqlite3.connect(os.path.join("db", "timesheets.db")) as conn:
             result = func(*args, conn=conn, **kwargs)
         return result
 
-    return wrapper()
+    return wrapper
 
 
 @ensure_connection
-def insert(table: str, column_values: Dict) -> None:
+def insert(conn, table: str, column_values: Dict) -> None:
     cursor = conn.cursor()
     columns = ', '.join(column_values.keys())
     values = [tuple(column_values.values())]
@@ -31,7 +28,7 @@ def insert(table: str, column_values: Dict) -> None:
 
 
 @ensure_connection
-def fetchall(table: str, columns: List[str]) -> List[Dict[str, any]]:
+def fetchall(conn, table: str, columns: List[str]) -> List[Dict[str, any]]:
     cursor = conn.cursor()
     columns_joined = ", ".join(columns)
     cursor.execute(f"SELECT {columns_joined} FROM {table}")
@@ -46,10 +43,9 @@ def fetchall(table: str, columns: List[str]) -> List[Dict[str, any]]:
 
 
 @ensure_connection
-def delete(conn, table: str, row_id: int):
-    row_id = int(row_id)
+def delete(conn, table: str, time: str):
     cursor = conn.cursor()
-    cursor.execute(f"delete from {table} where id={row_id}")
+    cursor.execute(f"delete from {table} where time={time}")
     conn.commit()
 
 
@@ -60,7 +56,7 @@ def get_cursor(conn):
 
 
 @ensure_connection
-def _init_db():
+def _init_db(conn):
     with open("createdb.sql", "r") as f:
         sql = f.read()
     cursor = conn.cursor()
@@ -69,7 +65,7 @@ def _init_db():
 
 
 @ensure_connection
-def check_init_db():
+def check_init_db(conn):
     cursor = conn.cursor()
     cursor.execute("SELECT name FROM sqlite_master "
                    "WHERE type='table' AND name='Users'")
