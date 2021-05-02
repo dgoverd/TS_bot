@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 # ФУНКЦИЯ ПРОВЕРЯЕТ, ЧТО ПОСЛЕ КАТЕГОРИИ ЗАПИСАНО ВРЕМЯ
@@ -82,3 +83,17 @@ def processing_of_list(spisok):
 
 
 
+=======
+# TODO Работа с таблицей категорий, их добавление и
+
+import db
+
+
+def add_category(category_names: str):  # вводим желаемые категории списком через запятую: Еда, Бот, Спорт, Быт
+    category_names = category_names.split(', ')
+    for category in category_names:
+        db.insert(
+            table='categories',
+            column_values={'category_name': category}
+        )
+>>>>>>> 7a961cd30cefa3adfc27307c828731487f8bb6c8
