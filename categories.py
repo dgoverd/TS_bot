@@ -1,3 +1,5 @@
+
+
 # ФУНКЦИЯ ПРОВЕРЯЕТ, ЧТО ПОСЛЕ КАТЕГОРИИ ЗАПИСАНО ВРЕМЯ
 
 def check_if_time_in_str(piece_of_str_with_time):
@@ -42,7 +44,7 @@ def parse_message(raw_message: str):
     return spisok  # в случае если все введено верно, возвращаем тот же список, что и пришел
 
 
-# ФУНКЦИЯ ПРЕОБРАЗОВАНИЯ ВРЕМЕНИ ИЗ STR В DATETIME
+# ФУНКЦИЯ ПРЕОБРАЗОВАНИЯ ВРЕМЕНИ ИЗ STR В DATETIME (ПРОВЕРИЛА РАБОТАЕТ)
 def convert_time_from_str_to_datetime(piece_of_str_with_time):
     today_data = datetime.date.today()
     f = today_data.strftime('%Y-%m-%d')  # вместо datetime сделали str
