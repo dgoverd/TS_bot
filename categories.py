@@ -46,11 +46,17 @@ def parse_message(raw_message: str):
 def convert_time_from_str_to_datetime(piece_of_str_with_time):
     today_data = datetime.date.today()
     f = today_data.strftime('%Y-%m-%d')  # вместо datetime сделали str
+    list_of_dates = []
+    for time in piece_of_str_with_time:
+        time_new = time.replace(" ", "")
+        data = f + " " + time_new
+        # print(data) # type str
+        date_time_obj = datetime.datetime.strptime(data, '%Y-%m-%d %H:%M')  # сделали из str обратно datetime
+        list_of_dates.append(date_time_obj)
 
-    time_new = t.replace(' ', '')
-    data = f + " " + time_new
-    print(data)  # type str
-    date_time_obj = datetime.datetime.strptime(data, '%Y-%m-%d %H:%M')  # сделали из str обратно datetime
+    return list_of_dates
+
+
 
 
 # ФУНКЦИЯ ПРИНИМАЕТ СПИСОК ОБРАБАТЫВАЕТ, ВОЗВРАЩАЕТ СПИСОК ['КАТЕГОРИЯ, ВРЕМЯ ПО 30 МИНУТ']
@@ -70,5 +76,7 @@ def processing_of_list(spisok):
         list_of_one_pair.pop([1])
 
     return list_of_pairs_date_category
+
+
 
 
