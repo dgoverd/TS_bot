@@ -10,3 +10,4 @@ def add_category(category_names: str):  # вводим желаемые кате
             table='categories',
             column_values={'category_name': category}
         )
+

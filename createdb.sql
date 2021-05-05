@@ -12,6 +12,7 @@ create table if not exists user_categories(
     category_id text,
     FOREIGN KEY (user_id) references users (telegram_id),
     FOREIGN KEY (category_id) references categories (category_name)
+    unique (category_id)
 );
 
 create table if not exists timetable(

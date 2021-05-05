@@ -7,6 +7,7 @@ import sqlite3
 def ensure_connection(func):
     def wrapper(*args, **kwargs):
         with sqlite3.connect(os.path.join("db", "timesheets.db")) as conn:
+            conn.execute("PRAGMA foreign_keys = 1")
             result = func(*args, conn=conn, **kwargs)
         return result
 
