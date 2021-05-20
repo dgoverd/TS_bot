@@ -44,9 +44,9 @@ def fetchall(conn, table: str, columns: List[str]) -> List[Dict[str, any]]:
 
 
 @ensure_connection
-def delete(conn, table: str, time: str):
+def delete(conn, table: str, row_id: int):
     cursor = conn.cursor()
-    cursor.execute(f"delete from {table} where time={time}")
+    cursor.execute(f"delete from {table} where id={row_id}")
     conn.commit()
 
 

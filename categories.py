@@ -13,8 +13,8 @@ def add_category(category_names: str):  # вводим желаемые кате
 def check_category_in_categories_db(category: str) -> bool:
     cursor = db.get_cursor()
     cursor.execute("SELECT count(*) FROM categories WHERE category_name = ?", (category,))
-    exist = cursor.fetchone()
-    if exist[0] is None:
+    exist = cursor.fetchone()[0]
+    if exist is None:
         print('False')
         return False
     else:

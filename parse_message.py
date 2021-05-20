@@ -26,11 +26,11 @@ def parse_message(telegram_id: int, raw_message: str) -> Message:
 
 
 def _split_message(raw_message: str) -> Tuple[str, str, str]:
-    split_message = re.match(r"(.*) (\d\d:\d\d)-(\d\d:\d\d)", raw_message)
+    split_message = re.match(r"(.*), (\d\d:\d\d)-(\d\d:\d\d)", raw_message)
     if not split_message or not split_message.group(0) \
             or not split_message.group(1) or not split_message.group(2) or not split_message.group(3):
         raise exceptions.NotCorrectMessage(
-            "Не могу понять сообщение. Напишите сообщение в формате, "
+            "Не могу понять сообщение. Напишите сообщение в правильом формате, "
             "например:\n Еда 18:00-19:30")
     category = split_message.group(1).lower()
     start_time = _add_today_date_to_time(split_message.group(2))

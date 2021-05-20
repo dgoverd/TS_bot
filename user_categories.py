@@ -22,7 +22,6 @@ def _check_user_category_in_users_categories_db(telegram_id: int, category: str)
     cursor.execute("SELECT count(*) FROM user_categories WHERE (user_id, category_id) = (?, ?)",
                    (telegram_id, category.lower()))
     exist = cursor.fetchone()[0]
-    print(exist)
     if exist == 0:
         return True
     else:
@@ -34,7 +33,6 @@ def check_user_category_in_users_categories_db(telegram_id: int, category: str) 
     cursor.execute("SELECT count(*) FROM user_categories WHERE (user_id, category_id) = (?, ?)",
                    (telegram_id, category.lower()))
     exist = cursor.fetchone()[0]
-    print(exist)
     if exist == 1:
         return True
     else:
@@ -46,7 +44,7 @@ def get_user_categories(telegram_id: int):
     cursor = db.get_cursor()
     cursor.execute("select category_id from user_categories where user_id=?", (telegram_id,))
     user_categories = cursor.fetchall()
-    print(user_categories)
+    return user_categories
 
 
 def get_id_user_categories(telegram_id: int, category: str):
@@ -55,4 +53,8 @@ def get_id_user_categories(telegram_id: int, category: str):
     cursor.execute("select id from user_categories where (user_id, category_id)=(?, ?)",
                    (telegram_id, category.lower()))
     user_categories = cursor.fetchone()[0]
-    print(user_categories)
+    return user_categories
+
+
+def del_usres_category(row_id: int):
+    db.delete(table="user_categories", row_id=row_id)
